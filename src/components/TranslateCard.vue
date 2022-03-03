@@ -1,7 +1,9 @@
 
 <template>
-  <div class="textwrap">
-
+  <div class="component">
+    <section>
+      <h1>Upper/Lower Case</h1>
+    </section>
     <p>Message is: {{ message }}</p>
     <input v-model="message" placeholder="text" />
     <button @click="translate()" href="#">Translate</button>

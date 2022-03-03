@@ -1,5 +1,8 @@
 <template>
-  <div class="textwrap">
+  <div class="component">
+    <section>
+      <h1>Clickables</h1>
+    </section>
     <h2 @click="hpCalc()" id="health">{{hp}}/100</h2>
     <h1 @click="resize()" id="helloText">{{ message }}</h1>
 

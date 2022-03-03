@@ -1,10 +1,9 @@
 <template>
-  <div id="main-grid">
+  <div id="main-grid" class="gridFlex">
 
-    <div id="type">
-      <NumPrint class="card">
-
-      </NumPrint>
+    <div id="translate">
+      <TranslateCard class="card">
+      </TranslateCard>
     </div>
     <div id="helloWorld">
       <HelloWorld class="card"></HelloWorld>
@@ -14,40 +13,56 @@
       </SettingsCard>
 
     </div>
+    <div id="countCard">
+      <CountCard class="card"> </CountCard>
+    </div>
+    <div id="axiosTest">
+      <AxiosTest class="card"> </AxiosTest>
+    </div>
+
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import NumPrint from "@/components/NumPrint";
+import TranslateCard from "@/components/TranslateCard";
 import SettingsCard from "@/components/SettingsCard";
+import CountCard from "@/components/CountCard";
+import AxiosTest from "@/components/AxiosTest";
 
 export default {
   name: 'App',
   components: {
     SettingsCard,
     HelloWorld,
-    NumPrint,
+    TranslateCard,
+    CountCard,
+    AxiosTest
   }
 }
 </script>
 
 <style>
+:root {
+  --main-color:#fff;
+}
+
 #app {
+  background: var(--main-color);
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #fff;
   margin: 2em 1em 2em;
   border-radius: 2vh;
   box-shadow: 0vh 0vh 3vh #828282;
+  word-wrap: break-word;
 }
 #main-grid {
   display: grid;
-  grid-gap: 2em;
-  grid-template-columns: 45em 1fr;
-  grid-auto-rows: 1fr;
+  grid-gap: 1fr;
+  grid-template-columns: 8fr 8fr;
+  grid-auto-rows: 8fr;
 }
 #type {
   display: flex;
@@ -58,7 +73,7 @@ export default {
   padding: 1em;
 }
 
-#helloWorld {
+gridFlex{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -73,13 +88,11 @@ export default {
   margin: 1vh 1vh 2vh 1vh;
   border: 1vh #040505;
   border-radius: 1vh;
-  filter: drop-shadow(0 0 0.75rem #252525);
+  filter: drop-shadow(0vh 0 0.5rem #252525);
 
 }
 
-textwrap{
-  word-wrap: break-word;
-}
+
 
 /* Animations
  */
@@ -96,5 +109,16 @@ textwrap{
 .slide-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
+}
+
+section{
+  height: 10vh;
+  background: rgba(255, 0, 0,20%);
+  box-shadow: 0vh 0vh 0.5vh #050505;
+  border-radius: 1vh;
+}
+
+html{
+  background: #040505;
 }
 </style>

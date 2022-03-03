@@ -1,11 +1,12 @@
 
 <template>
 
-  <div class="textwrap">
-
-    <p id="settingsText">Settings</p>
+  <div class="component">
+    <section>
+      <h1>Settings</h1>
+    </section>
     <div style="padding: 2vh">
-      <input v-model="colour" placeholder="Colour" />
+      <input v-model="colour" placeholder="#??????" />
       <button @click="changeColour()" href="#">Change Colour</button>
       <Transition name="slide-fade">
         <p v-if="message != ''">Boo!</p>
@@ -56,14 +57,8 @@ export default {
 
     changeColour() {
       this.message = "";
-      let current = document.getElementById("app").style.backgroundColor
-      console.log("try reached")
       console.log(this.colour)
-      document.getElementById("app").style.backgroundColor = this.colour;
-      if (document.getElementById("app").style.backgroundColor == current) {
-        console.log("catch reached")
-        this.message = "Error, Invalid Input";
-      }
+      document.documentElement.style.setProperty('--main-color', this.colour);
     },
     changeFontSize(){
       console.log("Font Confirm")
