@@ -53,23 +53,31 @@ export default {
     }
   },
   methods: {
-
+    setCookie(cname,cvalue,exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    },
 
     changeColour() {
       this.message = "";
       console.log(this.colour)
       document.documentElement.style.setProperty('--main-color', this.colour);
+      this.setCookie("colour", this.colour, 30);
     },
     changeFontSize(){
       console.log("Font Confirm")
       console.log(this.fontsize)
       document.getElementById("app").style.fontSize = this.fontsize+"vh";
+      this.setCookie("fontsize", this.fontsize, 30);
     },
 
     changeFont(){
       console.log("Font Confirm")
       console.log(this.font)
       document.getElementById("app").style.fontFamily = this.font;
+      this.setCookie("font", this.font, 30);
     }
 
   }

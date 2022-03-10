@@ -1,5 +1,5 @@
 <template>
-  <div class="component">
+  <div class="component" v-if="shouldRender">
     <section>
       <h1>Clickables</h1>
     </section>
@@ -17,7 +17,7 @@ export default {
       hp : 100,
       dead : false,
     }
-  },
+  }, props: ['shouldRender'],
   methods:{
     resize(){
       var el = document.getElementById('helloText');

@@ -8,11 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.2",
     "axios": "^0.26.0",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.8.3",
     "guava": "^0.0.5",
     "vue": "^3.2.13",
-    "vue-colour-picker": "^0.0.5"
+    "vue-colour-picker": "^0.0.5",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
