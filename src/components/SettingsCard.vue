@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="component">
+  <div class="component" v-if="shouldRender">
     <section>
       <h1>Settings</h1>
     </section>
@@ -43,6 +43,7 @@
 export default {
   name: "SettingsCard",
   el: '...',
+  props: ['shouldRender', 'showData'],
   data() {
     return {
       colour: '',
@@ -53,13 +54,6 @@ export default {
     }
   },
   methods: {
-    setCookie(cname,cvalue,exdays) {
-      const d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
-      let expires = "expires=" + d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    },
-
     changeColour() {
       this.message = "";
       console.log(this.colour)

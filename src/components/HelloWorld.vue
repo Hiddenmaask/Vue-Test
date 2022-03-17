@@ -17,7 +17,7 @@ export default {
       hp : 100,
       dead : false,
     }
-  }, props: ['shouldRender'],
+  },props: ['shouldRender'],
   methods:{
     resize(){
       var el = document.getElementById('helloText');

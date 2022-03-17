@@ -1,6 +1,6 @@
 
 <template>
-  <div class="component">
+  <div class="component" v-if="shouldRender">
     <section>
       <h1>Upper/Lower Case</h1>
     </section>
@@ -17,7 +17,7 @@ export default {
     return {
       message: '',
     }
-  },
+  },props: ['shouldRender'],
   methods:{
     translate(){
       if (this.message == this.message.toUpperCase()){

@@ -1,35 +1,33 @@
 <template>
+
   <div className="card">
+    <label for="cards">Choose a card:</label>
+
     <div className="component">
-      <section className="section">
+      <section className="section" id="graveyard">
         <button v-on:click="configComponents">Config Components</button>
+
       </section>
+      <ConfigCard :should-render="showData.showConfig" :showData="showData" class="card"
+                  @translate="updateparent1"
+                  @hello="updateparent2"
+                  @settings="updateparent3"
+                  @count="updateparent4"
+                  @axios="updateparent5">
+
+
+
+      </ConfigCard>
     </div>
   </div>
-  <div id="group">
+  <div id="group"  >
     <div id="modules" class="gridFlex main-grid">
+      <TranslateCard :should-render="showData.showTranslate" id="Translate" class="card"></TranslateCard>
+      <HelloWorld :should-render="showData.showHelloWorld" class="card" id="helloWorld"></HelloWorld>
+      <SettingsCard :should-render="showData.showSettings" class="card" > </SettingsCard>
+      <CountCard :should-render="showData.showCount" class="card"> </CountCard>
+      <AxiosTest :should-render="showData.showAxios" class="card"> </AxiosTest>
 
-      <div id="translate">
-        <TranslateCard class="card">
-        </TranslateCard>
-      </div>
-      <div id="helloWorld">
-        <HelloWorld :should-render="showData.showHelloWorld" class="card"></HelloWorld>
-      </div>
-      <div id="settingsCard">
-        <SettingsCard class="card">
-        </SettingsCard>
-
-      </div>
-      <div id="countCard">
-        <CountCard class="card"> </CountCard>
-      </div>
-      <div id="axiosTest">
-        <AxiosTest class="card"> </AxiosTest>
-      </div>
-      <div id="Config" >
-        <ConfigCard :should-render="showData.showConfig" :showData="showData" class="card"  @eventname="updateparent"></ConfigCard>
-      </div>
 
 
     </div>
@@ -44,6 +42,7 @@ import CountCard from "@/components/CountCard";
 import AxiosTest from "@/components/AxiosTest";
 import ConfigCard from "@/components/ConfigCard";
 
+
 export default {
   name: 'App',
   components: {
@@ -52,27 +51,65 @@ export default {
     TranslateCard,
     CountCard,
     AxiosTest,
-    ConfigCard
+    ConfigCard,
   },
+  props: ["edit", "value", "shouldRender"],
   data () {
     return {
-      showData:{
-        showHelloWorld: true,
-        showConfig: false,
+      selected: '',
+      showData: {
+        showHelloWorld: Boolean(localStorage.getItem("hello")),
+        showSettings: Boolean(localStorage.getItem("settings")),
+        showTranslate: Boolean(localStorage.getItem("translate")),
+        showCount: Boolean(localStorage.getItem("count")),
+        showAxios: Boolean(localStorage.getItem("axios")),
+        showConfig: Boolean(localStorage.getItem("config"))
       }
     }
   },
   methods: {
+    setCookie(cname,cvalue,exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    },
     configComponents(){
       this.showData.showConfig= !this.showData.showConfig;
     },
     toggleHelloWorld () {
       this.showData.showHelloWorld = !this.showData.showHelloWorld;
     },
-    updateparent(variable) {
+    updateparent1(variable) {
+      this.showData.showTranslate = variable;
+      localStorage.setItem("translate", !this.showData.showTranslate)
+    },
+    updateparent2(variable) {
       this.showData.showHelloWorld = variable;
+      localStorage.setItem("hello", this.showData.showHelloWorld)
+    },
+    updateparent3(variable) {
+      this.showData.showSettings = variable;
+      localStorage.setItem("settings", this.showData.showSettings)
+    },
+    updateparent4(variable) {
+      this.showData.showCount = variable;
+      localStorage.setItem("count", this.showData.showCount)
+    },
+    updateparent5(variable) {
+      this.showData.showAxios = variable;
+      localStorage.setItem("axios", this.showData.showAxios)
+    },
+    updateparent6(variable) {
+      this.showData.showConfig = variable;
+      localStorage.setItem("config", this.showData.showConfig)
+    },
+    forceRerender() {
+
     }
-  }
+  },
+  mounted() {
+  },
 }
 </script>
 
@@ -96,8 +133,8 @@ export default {
 .main-grid {
   display: grid;
   grid-gap: 1fr;
-  grid-template-columns: 8fr 8fr;
-  grid-auto-rows: 8fr;
+  grid-template-columns: 6fr 6fr;
+  grid-auto-rows: min-content;
 }
 #type {
   display: flex;
@@ -181,6 +218,16 @@ section{
   z-index: 2;
   width: 80%;
   text-align: center;
+}
+.closeButton{
+  position: absolute;
+  bottom: 0;
+  padding-right: 2vh;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  color: red;
 }
 
 html{

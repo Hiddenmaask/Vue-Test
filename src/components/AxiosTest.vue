@@ -1,5 +1,5 @@
 <template>
-  <div class="component">
+  <div class="component" v-if="shouldRender">
     <section class="section">
       <div class="bg-image"></div>
       <div class="bg-text">
@@ -28,7 +28,7 @@ export default {
       temp1: '',
       temp2: '',
     }
-  },
+  },props: ['shouldRender'],
   methods:{
     changeBackground(){
 
