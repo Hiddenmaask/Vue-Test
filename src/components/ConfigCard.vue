@@ -1,5 +1,5 @@
 <template>
-  <div class="component" v-if="shouldRender">
+  <div class="component" v-if="shouldRender" >
     <section>
       <h1>Config</h1>
     </section>
@@ -49,7 +49,6 @@ export default {
       }},
     check2(){
       if(document.getElementById("helloWorldCheck").checked){
-        console.log(this.showData.showHelloWorld)
         this.$emit('hello', true)
       }else{
         this.$emit('hello', false)

@@ -1,14 +1,16 @@
 <template>
 
   <div className="card">
-    <label for="cards">Choose a card:</label>
 
-    <div className="component">
-      <section className="section" id="graveyard">
-        <button v-on:click="configComponents">Config Components</button>
 
-      </section>
-      <ConfigCard :should-render="showData.showConfig" :showData="showData" class="card"
+  </div>
+  <div id="group"  >
+    <section className="section" style="height: auto; border-radius: 5vh;">
+      <button v-on:click="configComponents" >Config Components</button>
+    </section>
+
+    <div className="component card" style="height: auto; border-radius: 5vh;">
+      <ConfigCard  :should-render="showData.showConfig" :showData="showData"
                   @translate="updateparent1"
                   @hello="updateparent2"
                   @settings="updateparent3"
@@ -19,8 +21,6 @@
 
       </ConfigCard>
     </div>
-  </div>
-  <div id="group"  >
     <div id="modules" class="gridFlex main-grid">
       <TranslateCard :should-render="showData.showTranslate" id="Translate" class="card"></TranslateCard>
       <HelloWorld :should-render="showData.showHelloWorld" class="card" id="helloWorld"></HelloWorld>
@@ -68,21 +68,13 @@ export default {
     }
   },
   methods: {
-    setCookie(cname,cvalue,exdays) {
-      const d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
-      let expires = "expires=" + d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    },
     configComponents(){
       this.showData.showConfig= !this.showData.showConfig;
-    },
-    toggleHelloWorld () {
-      this.showData.showHelloWorld = !this.showData.showHelloWorld;
+      localStorage.setItem("config", (this.showData.showConfig).toString());
     },
     updateparent1(variable) {
       this.showData.showTranslate = variable;
-      localStorage.setItem("translate", !this.showData.showTranslate)
+      localStorage.setItem("translate", this.showData.showTranslate)
     },
     updateparent2(variable) {
       this.showData.showHelloWorld = variable;
@@ -109,6 +101,44 @@ export default {
     }
   },
   mounted() {
+    let check = (localStorage.getItem("hello"))//to boolean value
+    if (check === "true") {
+      this.showData.showHelloWorld = true;
+    } else {
+      this.showData.showHelloWorld = false;
+    }
+    check = (localStorage.getItem("settings"))//to boolean value
+    if (check === "true") {
+      this.showData.showSettings = true;
+    } else {
+      this.showData.showSettings = false;
+    }
+    check = (localStorage.getItem("translate"))//to boolean value
+    if (check === "true") {
+      this.showData.showTranslate = true;
+    } else {
+      this.showData.showTranslate = false;
+    }
+    check = (localStorage.getItem("count"))//to boolean value
+    if (check === "true") {
+      this.showData.showCount = true;
+    } else {
+      this.showData.showCount = false;
+    }
+    check = (localStorage.getItem("axios"))//to boolean value
+    if (check === "true") {
+      this.showData.showAxios = true;
+    } else {
+      this.showData.showAxios = false;
+    }
+    check = (localStorage.getItem("config"))//to boolean value
+    if (check === "true") {
+      this.showData.showConfig = true;
+    } else {
+      this.showData.showConfig = false;
+    }
+
+
   },
 }
 </script>
@@ -184,41 +214,12 @@ gridFlex{
 section{
   height: 10vh;
   background: var(--main-color);
+  color: black;
   box-shadow: 0vh 0vh 1vh #050505;
 
 }
 
-.bg-image{
-  /* The image used */
-  background-image: var(--crypto-back);
 
-  /* Add the blur effect */
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bg-text{
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-  color: white;
-  font-weight: bold;
-  border: 3px solid #f1f1f1;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 80%;
-  text-align: center;
-}
 .closeButton{
   position: absolute;
   bottom: 0;
@@ -232,5 +233,6 @@ section{
 
 html{
   background: #040505;
+  color: white;
 }
 </style>

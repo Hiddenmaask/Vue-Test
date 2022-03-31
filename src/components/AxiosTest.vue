@@ -1,7 +1,7 @@
 <template>
   <div class="component" v-if="shouldRender">
     <section class="section">
-      <div class="bg-image"></div>
+      <div class="bg-image" id="bgImage"></div>
       <div class="bg-text">
         <h1>Axios Test</h1>
       </div>
@@ -9,6 +9,7 @@
     <button @click="changeBackground()" href="#">Change Background</button>
     <h2 id="BTC">1 Bitcoin: {{btc}} | {{trendBTC}}</h2>
     <h2 id="ETH">1 Ethereum: {{eth}} | {{trendETH}}</h2>
+    <button @click="testBackground()" href="#">Test Background</button>
 
   </div>
 </template>
@@ -32,13 +33,13 @@ export default {
   methods:{
     changeBackground(){
 
-      /*
+
       var axios = require("axios").default;
 
       var options = {
         method: 'GET',
         url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
-        params: {q: 'bitcoin png', pageNumber: '1', pageSize: '1', autoCorrect: 'true'},
+        params: {q: 'bitcoin png', pageNumber: '1', pageSize: '30', autoCorrect: 'true'},
         headers: {
           'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
           'x-rapidapi-key': '436801be5amshac1799745813e84p14a2b8jsn827e3d46a769'
@@ -47,11 +48,24 @@ export default {
 
       axios.request(options).then(function (response) {
         console.log(response.data);
+        var random = Math.floor(Math.random() * 30);
+
+        document.getElementById("bgImage").style.backgroundImage = "url("+response.data.value[random].url+"";
       }).catch(function (error) {
         console.error(error);
+        this.changeBackground()
       });
 
-       */
+
+
+    },
+    testBackground() {
+      var bgImage = document.getElementById("bgImage").style.backgroundImage;
+      document.getElementById("bgImage").style.backgroundImage = "url(https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png)";
+      setTimeout(function(){
+        document.getElementById("bgImage").style.backgroundImage = bgImage;
+      }, 5000);
+
 
     }
   },
@@ -89,5 +103,38 @@ export default {
 </script>
 
 <style scoped>
+.bg-image{
+  /* The image used */
+  background-image: var(--crypto-back);
 
+  /* Add the blur effect */
+  /*
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+   */
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-text{
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  text-align: center;
+}
 </style>
